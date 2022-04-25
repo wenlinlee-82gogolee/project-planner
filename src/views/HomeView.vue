@@ -29,7 +29,7 @@ export default {
   },
   components: { SingleProject, FilterNav },
   mounted() {
-    fetch('http://localhost:3000/projects')
+    fetch('https://wll-project-planner.herokuapp.com/projects')
       .then(res => res.json())
       .then(data => (this.projects = data))
       .catch(err => console.log(err.message));
@@ -37,12 +37,12 @@ export default {
   methods: {
     handleDelete(id) {
       this.projects = this.projects.filter(project => {
-        return project.id !== id;
+        return project._id !== id;
       });
     },
     handleComplete(id) {
       let p = this.projects.find(project => {
-        return project.id === id;
+        return project._id === id;
       });
       p.complete = !p.complete;
     },

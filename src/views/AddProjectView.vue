@@ -26,7 +26,7 @@ export default {
         complete: false,
       };
       console.log(project);
-      fetch('http://localhost:3000/projects/', {
+      fetch('https://wll-project-planner.herokuapp.com/projects/', {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(project),

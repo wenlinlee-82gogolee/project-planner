@@ -3,7 +3,7 @@
     <div class="actions">
       <h3 @click="showDetails = !showDetails">{{ project.title }}</h3>
       <div class="icons">
-        <router-link :to="{ name: 'editProject', params: { id: project.id } }">
+        <router-link :to="{ name: 'editProject', params: { id: project._id } }">
           <span class="material-icons"> edit </span>
         </router-link>
 
@@ -22,7 +22,9 @@ export default {
   data() {
     return {
       showDetails: false,
-      uri: 'http://localhost:3000/projects/' + this.project.id,
+      uri:
+        'https://wll-project-planner.herokuapp.com/projects/' +
+        this.project._id,
     };
   },
   props: ['project'],
@@ -30,7 +32,7 @@ export default {
     deleteProject() {
       console.log(this.uri);
       fetch(this.uri, { method: 'DELETE' })
-        .then(() => this.$emit('delete', this.project.id))
+        .then(() => this.$emit('delete', this.project._id))
         .catch(err => console.log(err.message));
     },
     toggleComplete() {
@@ -40,7 +42,7 @@ export default {
         body: JSON.stringify({ complete: !this.project.complete }),
       })
         .then(() => {
-          this.$emit('complete', this.project.id);
+          this.$emit('complete', this.project._id);
         })
         .catch(err => console.log(err.message));
     },
